@@ -1,0 +1,7 @@
+
+  .image-transition {
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+    transition: background-image 0.5s ease-in-out;
+  }
