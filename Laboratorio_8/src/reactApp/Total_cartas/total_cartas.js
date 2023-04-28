@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import Carta from "../Carta/carta.js";
 import { images } from "../Imagenes/imagenes.js";
@@ -5,18 +6,17 @@ import backgroundImage from "../../Imagenes/background1.png";
 import "./total_cartas.css";
 import Indice from "../Indice/indice.js";
 
-class TotalCartas extends Component {
+class total_cartas extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lastClickedId: null
+      contador: 0
     };
-    this.handleCardClick = this.handleCardClick.bind(this);
   }
 
-  handleCardClick(id) {
-    this.setState({ lastClickedId: id });
-  }
+  handleCartaClick = () => {
+    this.setState((prevState) => ({ contador: prevState.contador + 1 }));
+  };
 
   render() {
     let cards = [];
@@ -34,8 +34,7 @@ class TotalCartas extends Component {
           backgroundImage={images[0].src}
           newImage={images[newImageIndex].src}
           id={images[newImageIndex].id}
-          lastClickedId={this.state.lastClickedId}
-          handleCardClick={this.handleCardClick}
+          onClickCarta={this.handleCartaClick}
         ></Carta>
       );
       i++;
@@ -50,25 +49,14 @@ class TotalCartas extends Component {
     };
     return (
       <div style={style}>
-        <Indice />
+        <Indice count={this.state.contador} />
         <div id="tabla">{cards}</div>
-      </div>
+        </div>
     );
   }
 }
 
-export default TotalCartas;
-
-
-
-
-
-
-
-
-
-
-
+export default total_cartas;
 
 /*
 import React, { Component } from "react";
@@ -94,6 +82,7 @@ class total_cartas extends Component {
           key={i}
           backgroundImage={images[0].src}
           newImage={images[newImageIndex].src}
+          id={images[newImageIndex].id}
         ></Carta>
       );
       i++;
